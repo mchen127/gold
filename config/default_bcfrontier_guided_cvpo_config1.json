@@ -1,0 +1,10 @@
+{
+  "project": "GOLD",
+  "task": "SafetyCarCircle1Gymnasium-v0",
+  "prefix": "bcfrontier_cvpo",
+  "name": "default_bcfrontier_guided_cvpo_seed10",
+  "cost_limit": 20,
+  "seed": 10,
+  "offline_model_path": "/home/mc/gold/logs/OfflineCarCircle1Gymnasium-v0-cost-20/BC_bc_modefrontier_cost20_seed10-bcac/BC_bc_modefrontier_cost20_seed10-bcac",
+  "h": 100
+}

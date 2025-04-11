@@ -1,0 +1,10 @@
+{
+  "project": "GOLD",
+  "task": "SafetyCarCircle1Gymnasium-v0",
+  "prefix": "bcsafe_cvpo",
+  "name": "default_bcsafe_guided_cvpo_seed20",
+  "cost_limit": 20,
+  "seed": 20,
+  "offline_model_path": "/home/mc/gold/logs/OfflineCarCircle1Gymnasium-v0-cost-20/BC_bc_modesafe_cost20_seed20-7d32/BC_bc_modesafe_cost20_seed20-7d32",
+  "h": 100
+}

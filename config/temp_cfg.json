@@ -1,0 +1,21 @@
+{
+    "project": "GOLD",
+    "prefix": "BCExpert_CVPO",
+    "tasks_and_offline_model_paths": [
+        {
+            "task": "SafetyCarButton1Gymnasium-v0",
+            "offline_model_paths": [
+                "/home/mc/gold/logs/OfflineCarButton1Gymnasium-v0-cost-80/BC_bc_modeexpert_cost80_seed30-d51c/BC_bc_modeexpert_cost80_seed30-d51c"
+            ]
+        }
+    ],
+    "cost_limit": [
+        80
+    ],
+    "seed": [
+        30
+    ],
+    "h": [
+        375
+    ]
+}

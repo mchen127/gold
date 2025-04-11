@@ -1,0 +1,51 @@
+{
+    "project": "GOLD",
+    "prefix": "BCExpert_CVPO",
+    "tasks_and_offline_model_paths": [
+        {
+            "task": "SafetyCarButton1Gymnasium-v0",
+            "offline_model_paths": [
+                "/home/mc/gold/logs/OfflineCarButton1Gymnasium-v0-cost-80/BC_bc_modeexpert_cost80_seed10-6e10/BC_bc_modeexpert_cost80_seed10-6e10",
+                "/home/mc/gold/logs/OfflineCarButton1Gymnasium-v0-cost-80/BC_bc_modeexpert_cost80_seed20-2fc0/BC_bc_modeexpert_cost80_seed20-2fc0",
+                "/home/mc/gold/logs/OfflineCarButton1Gymnasium-v0-cost-80/BC_bc_modeexpert_cost80_seed30-d51c/BC_bc_modeexpert_cost80_seed30-d51c"
+            ]
+        },
+        {
+            "task": "SafetyPointButton1Gymnasium-v0",
+            "offline_model_paths": [
+                "/home/mc/gold/logs/OfflinePointButton1Gymnasium-v0-cost-80/BC_bc_modeexpert_cost80_seed10-bc7b/BC_bc_modeexpert_cost80_seed10-bc7b",
+                "/home/mc/gold/logs/OfflinePointButton1Gymnasium-v0-cost-80/BC_bc_modeexpert_cost80_seed20-3ece/BC_bc_modeexpert_cost80_seed20-3ece",
+                "/home/mc/gold/logs/OfflinePointButton1Gymnasium-v0-cost-80/BC_bc_modeexpert_cost80_seed30-ea85/BC_bc_modeexpert_cost80_seed30-ea85"
+            ]
+        },
+        {
+            "task": "SafetyCarGoal1Gymnasium-v0",
+            "offline_model_paths": [
+                "/home/mc/gold/logs/OfflineCarGoal1Gymnasium-v0-cost-80/BC_bc_modeexpert_cost80_seed10-ef2c/BC_bc_modeexpert_cost80_seed10-ef2c",
+                "/home/mc/gold/logs/OfflineCarGoal1Gymnasium-v0-cost-80/BC_bc_modeexpert_cost80_seed20-aea6/BC_bc_modeexpert_cost80_seed20-aea6",
+                "/home/mc/gold/logs/OfflineCarGoal1Gymnasium-v0-cost-80/BC_bc_modeexpert_cost80_seed30-edd7/BC_bc_modeexpert_cost80_seed30-edd7"
+            ]
+        },
+        {
+            "task": "SafetyPointGoal1Gymnasium-v0",
+            "offline_model_paths": [
+                "/home/mc/gold/logs/OfflinePointGoal1Gymnasium-v0-cost-80/BC_bc_modeexpert_cost80_seed10-0304/BC_bc_modeexpert_cost80_seed10-0304",
+                "/home/mc/gold/logs/OfflinePointGoal1Gymnasium-v0-cost-80/BC_bc_modeexpert_cost80_seed20-ae70/BC_bc_modeexpert_cost80_seed20-ae70",
+                "/home/mc/gold/logs/OfflinePointGoal1Gymnasium-v0-cost-80/BC_bc_modeexpert_cost80_seed30-1f69/BC_bc_modeexpert_cost80_seed30-1f69"
+            ]
+        }
+    ],
+    "cost_limit": [
+        80
+    ],
+    "seed": [
+        10,
+        20,
+        30
+    ],
+    "h": [
+        125,
+        250,
+        375
+    ]
+}

@@ -1,0 +1,5 @@
+wandb
+wandb/*
+logs
+loss/*
+__pycache__
