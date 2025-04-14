@@ -1,0 +1,38 @@
+{
+  "project": "GOLD",
+  "task": "SafetyCarCircle1Gymnasium-v0",
+  "cost_limit": 20,
+  "h": 100,
+  "experiment_settings": [
+    {
+      "prefix": "bcsafe_cvpo",
+      "seed": 10,
+      "offline_model_path": "/home/mc/gold/logs/OfflineCarCircle1Gymnasium-v0-cost-20/BC_bc_modesafe_cost20_seed10-c989/BC_bc_modesafe_cost20_seed10-c989"
+    },
+    {
+      "prefix": "bcsafe_cvpo",
+      "seed": 20,
+      "offline_model_path": "/home/mc/gold/logs/OfflineCarCircle1Gymnasium-v0-cost-20/BC_bc_modesafe_cost20_seed20-7d32/BC_bc_modesafe_cost20_seed20-7d32"
+    },
+    {
+      "prefix": "bcsafe_cvpo",
+      "seed": 30,
+      "offline_model_path": "/home/mc/gold/logs/OfflineCarCircle1Gymnasium-v0-cost-20/BC_bc_modesafe_cost20_seed30-f802/BC_bc_modesafe_cost20_seed30-f802"
+    },
+    {
+      "prefix": "bcfrontier_cvpo",
+      "seed": 10,
+      "offline_model_path": "/home/mc/gold/logs/OfflineCarCircle1Gymnasium-v0-cost-20/BC_bc_modefrontier_cost20_seed10-bcac/BC_bc_modefrontier_cost20_seed10-bcac"
+    },
+    {
+      "prefix": "bcfrontier_cvpo",
+      "seed": 20,
+      "offline_model_path": "/home/mc/gold/logs/OfflineCarCircle1Gymnasium-v0-cost-20/BC_bc_modefrontier_cost20_seed20-0589/BC_bc_modefrontier_cost20_seed20-0589"
+    },
+    {
+      "prefix": "bcfrontier_cvpo",
+      "seed": 30,
+      "offline_model_path": "/home/mc/gold/logs/OfflineCarCircle1Gymnasium-v0-cost-20/BC_bc_modefrontier_cost20_seed30-1c13/BC_bc_modefrontier_cost20_seed30-1c13"
+    }
+  ]
+}

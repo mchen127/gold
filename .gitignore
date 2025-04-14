@@ -1,5 +1,7 @@
+__pycache__
 wandb
 wandb/*
 logs
 loss/*
-__pycache__
+fsrl_logs
+fsrl_logs/*

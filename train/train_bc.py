@@ -19,7 +19,7 @@ from fsrl.utils import WandbLogger
 from torch.utils.data import DataLoader
 from tqdm.auto import trange  # noqa
 
-from config.bc_default_config import BC_DEFAULT_CONFIG, BCTrainConfig
+from config.bc_configs import BC_DEFAULT_CONFIG, BCTrainConfig
 from osrl.algorithms import BC, BCTrainer
 from osrl.common import TransitionDataset
 # from osrl.common.dataset import process_bc_dataset

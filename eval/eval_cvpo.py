@@ -147,14 +147,14 @@ def eval(args: EvalConfig):
 
         test_envs.close()  # 關閉環境，釋放資源
 
-    rews, lens, costs = np.mean(all_rewards), np.mean(all_lengths), np.mean(all_costs)
+    rews, lens, costs, normalized_cost = np.mean(all_rewards), np.mean(all_lengths), np.mean(all_costs), np.mean(all_costs) / (cfg["cost_limit"] + 1e-8)
     # 最後統計 50 個 episodes 的結果
     print(f"Final Eval reward: {rews}, cost: {costs}, length: {lens}")
 
     # Save to CSV
     try:
         save_results_to_csv(
-            args.output_path, cfg["task"], cfg["name"], cfg["cost_limit"], cfg["seed"], args.best, rews, costs, lens
+            args.output_path, cfg["task"], cfg["name"], cfg["cost_limit"], cfg["seed"], args.best, rews, costs, normalized_cost, lens
         )
     except Exception as e:
         import traceback
@@ -162,9 +162,9 @@ def eval(args: EvalConfig):
         print(traceback.format_exc())
 
 
-def save_results_to_csv(csv_path, task_name, model_name, cost_limit, seed, is_best, reward, cost, length):
+def save_results_to_csv(csv_path, task_name, model_name, cost_limit, seed, is_best, reward, cost, normalized_cost, length):
     """Append evaluation results to a CSV file."""
-    header = ["Task", "Model", "Cost Limit", "Seed", "Best", "Reward", "Cost", "Length"]
+    header = ["Task", "Model", "Cost Limit", "Seed", "Best", "Reward", "Cost", "Normalized Cost", "Length"]
     write_header = not os.path.exists(csv_path)  # Only write header if the file is new
     # Ensure the directory exists
     os.makedirs(os.path.dirname(csv_path), exist_ok=True)
@@ -175,7 +175,7 @@ def save_results_to_csv(csv_path, task_name, model_name, cost_limit, seed, is_be
         writer = csv.writer(f)
         if write_header:
             writer.writerow(header)
-        writer.writerow([task_name, model_name, cost_limit, seed, is_best, reward, cost, length])
+        writer.writerow([task_name, model_name, cost_limit, seed, is_best, reward, cost, normalized_cost, length])
 
     print(f"Results saved to {csv_path}")
 
