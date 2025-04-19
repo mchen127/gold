@@ -2,6 +2,7 @@ import os
 import json
 import random
 from easy_runner import EasyRunner
+from utils import get_hostname
 
 # Set a master seed
 master_seed = 42
@@ -10,7 +11,8 @@ rng = random.Random(master_seed)
 if __name__ == "__main__":
 
     exp_name = "train_cvpo"
-    runner = EasyRunner(log_name=exp_name)
+    log_name = f"{exp_name}_{get_hostname()}"
+    runner = EasyRunner(log_name=log_name)
 
     config_path = (
         "/home/mc/gold/exp_configs/exp3-cvpo_performance_examination.json"
@@ -33,7 +35,7 @@ if __name__ == "__main__":
     # Generate 30 reproducible random seeds
     seeds = [rng.randint(0, 99999) for _ in range(n_runs)]
     remaining_seeds = seeds.copy()
-    remaining_seeds = remaining_seeds[9:]
+    remaining_seeds = remaining_seeds[0:9]
     
 
     # Define command template
@@ -45,7 +47,7 @@ if __name__ == "__main__":
         --task '{{}}' \
         --cost_limit '{{}}' \
         --seed '{{}}' \
-        --device 'cuda' \
+        # --device 'cpu' \
     "
 
     # Remove all extra whitespace
