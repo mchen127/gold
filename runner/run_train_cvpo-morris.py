@@ -15,7 +15,7 @@ if __name__ == "__main__":
     runner = EasyRunner(log_name=log_name)
 
     config_path = (
-        "/home/mc/gold/exp_configs/exp3-cvpo_performance_examination.json"
+        "/home/mc/gold/exp_configs/exp4-cvpo-velocity_tasks.json"
     )
 
     with open(config_path, "r") as file:
@@ -34,8 +34,7 @@ if __name__ == "__main__":
 
     # Generate 30 reproducible random seeds
     seeds = [rng.randint(0, 99999) for _ in range(n_runs)]
-    remaining_seeds = seeds.copy()
-    remaining_seeds = remaining_seeds[0:9]
+    # remaining_seeds = seeds.copy()
     
 
     # Define command template
@@ -47,16 +46,16 @@ if __name__ == "__main__":
         --task '{{}}' \
         --cost_limit '{{}}' \
         --seed '{{}}' \
-        # --device 'cpu' \
+        --device 'cuda' \
     "
 
     # Remove all extra whitespace
     template = " ".join(template.split())
 
     # Compose training instructions
-    train_instructions = runner.compose(template, [tasks, cost_limits, remaining_seeds])
+    train_instructions = runner.compose(template, [tasks, cost_limits, seeds])
 
     # Start tasks in parallel (limit to 15 at a time)
-    runner.start(train_instructions, max_parallel=4)
+    runner.start(train_instructions, max_parallel=10)
 
     print("All tasks have started. Check logs for progress.")

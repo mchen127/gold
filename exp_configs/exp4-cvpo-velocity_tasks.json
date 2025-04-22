@@ -1,0 +1,18 @@
+{
+    "project": "FSRL",
+    "logdir": "fsrl_logs",
+    "prefix": "CVPO",
+    "tasks": [
+        "SafetyHalfCheetahVelocityGymnasium-v1"
+    ],
+    "cost_limits": [
+        50
+    ],
+    "n/runs": 30,
+    "hidden_tasks": [
+        "SafetyWalker2dVelocityGymnasium-v1",
+        "SafetyAntVelocityGymnasium-v1",
+        "SafetyHopperVelocityGymnasium-v1",
+        "SafetySwimmerVelocityGymnasium-v1"
+    ]
+}
