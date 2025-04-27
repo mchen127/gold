@@ -6,7 +6,7 @@
         "SafetyHalfCheetahVelocityGymnasium-v1"
     ],
     "cost_limits": [
-        50
+        100, 150
     ],
     "n/runs": 30,
     "hidden_tasks": [

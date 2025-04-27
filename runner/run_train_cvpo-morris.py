@@ -21,7 +21,7 @@ if __name__ == "__main__":
     with open(config_path, "r") as file:
         config = json.load(file)
     print(config)
-    
+
     # Set hyperparameters
     # non-interable
     project = config["project"]
@@ -33,9 +33,19 @@ if __name__ == "__main__":
     cost_limits = config["cost_limits"]
 
     # Generate 30 reproducible random seeds
-    seeds = [rng.randint(0, 99999) for _ in range(n_runs)]
-    # remaining_seeds = seeds.copy()
-    
+    # seeds = [rng.randint(0, 99999) for _ in range(n_runs)]
+    remaining_seeds = [
+        26062,
+        73563,
+        3478,
+        78907,
+        66237,
+        30495,
+        28657,
+        12280,
+        3905,
+        4165,
+    ]
 
     # Define command template
     template = f"\
@@ -53,9 +63,9 @@ if __name__ == "__main__":
     template = " ".join(template.split())
 
     # Compose training instructions
-    train_instructions = runner.compose(template, [tasks, cost_limits, seeds])
+    train_instructions = runner.compose(template, [tasks, cost_limits, remaining_seeds])
 
     # Start tasks in parallel (limit to 15 at a time)
-    runner.start(train_instructions, max_parallel=10)
+    runner.start(train_instructions, max_parallel=4)
 
     print("All tasks have started. Check logs for progress.")

@@ -1,5 +1,7 @@
 import csv
 import os
+import os.path as osp
+import yaml
 from dataclasses import asdict, dataclass
 import numpy as np
 import bullet_safety_gym
@@ -33,11 +35,33 @@ class EvalConfig:
     device: str = "cpu"
     render: bool = False
 
+def load_config_and_model_considering_device(path: str, best: bool = False, device: str = "cpu"):
+    """
+    Load the configuration and model from the specified path.
+    :param path: Path to the model directory.
+    :param best: Whether to load the best model.
+    :param device: Device to load the model on (e.g., "cpu", "cuda").
+    :return: Tuple of configuration and model.
+    """
+    if osp.exists(path):
+        config_file = osp.join(path, "config.yaml")
+        print(f"load config from {config_file}")
+        with open(config_file) as f:
+            config = yaml.load(f.read(), Loader=yaml.FullLoader)
+        model_file = "model.pt"
+        if best:
+            model_file = "model_best.pt"
+        model_path = osp.join(path, "checkpoint/" + model_file)
+        print(f"load model from {model_path}")
+        model = torch.load(model_path, map_location=torch.device(device=device))
+        return config, model
+    else:
+        raise ValueError(f"{path} doesn't exist!")
+
 
 @pyrallis.wrap()
 def eval(args: EvalConfig):
-    cfg, model = load_config_and_model(args.model_path, args.best)
-
+    cfg, model = load_config_and_model_considering_device(args.model_path, args.best, args.device)
     # Seed
     seed_all(cfg["seed"])
     torch.set_num_threads(cfg["thread"])
@@ -147,14 +171,18 @@ def eval(args: EvalConfig):
 
         test_envs.close()  # 關閉環境，釋放資源
 
-    rews, lens, costs, normalized_cost = np.mean(all_rewards), np.mean(all_lengths), np.mean(all_costs), np.mean(all_costs) / (cfg["cost_limit"] + 1e-8)
+    normalized_costs = [cost / (cfg["cost_limit"] + 1e-8) for cost in all_costs]
+    rews, lens, costs, normalized_cost = np.mean(all_rewards), np.mean(all_lengths), np.mean(all_costs), np.mean(normalized_costs)
     # 最後統計 50 個 episodes 的結果
     print(f"Final Eval reward: {rews}, cost: {costs}, length: {lens}")
 
     # Save to CSV
     try:
-        save_results_to_csv(
-            args.output_path, cfg["task"], cfg["name"], cfg["cost_limit"], cfg["seed"], args.best, rews, costs, normalized_cost, lens
+        # save_results_to_csv(
+        #     args.output_path, cfg["task"], cfg["name"], cfg["cost_limit"], cfg["seed"], args.best, rews, costs, normalized_cost, lens
+        # )
+        save_all_results_to_csv(
+            args.output_path, cfg["task"], cfg["name"], cfg["cost_limit"], cfg["seed"], args.best, all_rewards, all_costs, normalized_costs, all_lengths
         )
     except Exception as e:
         import traceback
@@ -179,6 +207,24 @@ def save_results_to_csv(csv_path, task_name, model_name, cost_limit, seed, is_be
 
     print(f"Results saved to {csv_path}")
 
+def save_all_results_to_csv(csv_path, task_name, model_name, cost_limit, seed, is_best, all_rewards, all_costs, normalized_costs, all_lengths):
+    """Append evaluation results to a CSV file."""
+    header = ["Task", "Model", "Cost Limit", "Seed", "Best", "Reward", "Cost", "Normalized Cost", "Length"]
+    write_header = not os.path.exists(csv_path)  # Only write header if the file is new
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(csv_path), exist_ok=True)
+    # Append results to the CSV file
+    # Open the CSV file in append mode
+    # and write the header if it's the first time
+    with open(csv_path, mode="a", newline="") as f:
+        writer = csv.writer(f)
+        if write_header:
+            writer.writerow(header)
+        for reward, cost, normalized_cost, length in zip(all_rewards, all_costs, normalized_costs, all_lengths):
+            # Write each result to the CSV file
+            writer.writerow([task_name, model_name, cost_limit, seed, is_best, reward, cost, normalized_cost, length])
+
+    print(f"Results saved to {csv_path}")
 
 if __name__ == "__main__":
     eval()

@@ -29,7 +29,7 @@ if __name__ == "__main__":
     prefix = config["prefix"]
     n_runs = config["n/runs"]
     # interable
-    tasks = [config["hidden_tasks"][0]]
+    tasks = config["tasks"]
     cost_limits = config["cost_limits"]
 
     # Generate 30 reproducible random seeds
